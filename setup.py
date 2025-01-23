@@ -13,7 +13,7 @@ def get_requirements(file_path:str)->List[str]:
         return requirements
 
 setup(
-    name="DiamondPriceprediction",
+    name="sensor_fault_detection",
     version='0.0.1',
     author='Dikshant Narware',
     author_email="dikshantnarware@gmail.com",

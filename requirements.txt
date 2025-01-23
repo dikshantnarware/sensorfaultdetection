@@ -2,3 +2,7 @@ ipykernel
 pandas
 numpy
 flask
+
+
+
+-e .
