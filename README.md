@@ -28,6 +28,9 @@ run this commond for installing a setup.py file for creating info packege
 
 [got this folder and packages 
 ](dist) [got this folder and packages 
-](DiamondPriceprediction.egg-info) [got this folder and packages 
+](sensor_fault_detection.egg-info) [got this folder and packages 
 ](build)
+
+then run and got the package sensor_fault_detection from list
+>>>> pip list
 
