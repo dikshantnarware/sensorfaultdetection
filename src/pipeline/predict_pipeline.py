@@ -46,6 +46,7 @@ class PredictionPipeline:
         """
 
         try:
+            #creating the file
             pred_file_input_dir = "prediction_artifacts"
             os.makedirs(pred_file_input_dir, exist_ok=True)
 
@@ -61,6 +62,20 @@ class PredictionPipeline:
             raise CustomException(e,sys)
 
     def predict(self, features):
+            """
+            Predict the output using the trained model and preprocessor.
+            Args:
+                features (pd.DataFrame): The input features for prediction. The columns of this DataFrame
+                                         must match the feature names used during the training of the model.
+            Returns:
+                np.ndarray: The predicted values.
+            Raises:
+                CustomException: If there is an error during the prediction process.
+            Note:
+                The input features DataFrame must contain the same feature names as those used during the
+                training of the model. These feature names are stored in the preprocessor's attribute
+                `feature_names_in_`.
+            """
             try:
                 
                 
@@ -68,6 +83,10 @@ class PredictionPipeline:
                 model = self.utils.load_object(self.prediction_pipeline_config.model_file_path)
                 preprocessor = self.utils.load_object(file_path=self.prediction_pipeline_config.preprocessor_path)
 
+                # Ensure the input features match the training features
+                preprocessor = self.utils.load_object(self.prediction_pipeline_config.preprocessor_path)
+               
+            
                 transformed_x = preprocessor.transform(features)
 
                 preds = model.predict(transformed_x)

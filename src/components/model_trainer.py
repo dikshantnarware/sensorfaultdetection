@@ -1,20 +1,22 @@
+
 import sys
 from typing import Generator, List, Tuple
 import os
 import pandas as pd
 import numpy as np
 from sklearn.metrics import accuracy_score
-
-from xgboost import XGBClassifier
+from sklearn.base import BaseEstimator, ClassifierMixin
+# from xgboost.sklearn import XGBClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV, train_test_split
-from src.constant import *
+from src.constant import artifact_folder
 from src.exception import CustomException
 from src.logger import logging
 from src.utils.main_utils import MainUtils
 
 from dataclasses import dataclass
+from sklearn.utils.estimator_checks import check_estimator
 
 @dataclass
 class ModelTrainerConfig:
@@ -35,14 +37,14 @@ class ModelTrainer:
         self.utils = MainUtils()
 
         self.models = {
-                        'XGBClassifier': XGBClassifier(),
+                        # 'XGBClassifier': XGBClassifier(),
                         'GradientBoostingClassifier' : GradientBoostingClassifier(),
                         'SVC' : SVC(),
                         'RandomForestClassifier': RandomForestClassifier()
                         }
 
     
-    def evaluate_models(self, X, y, models):
+    def evaluate_models(self, X, y, x_test, y_test, models):
         try:
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.2, random_state=42
@@ -162,7 +164,7 @@ class ModelTrainer:
 
             logging.info(f"Extracting model config file path")
 
-            model_report: dict = self.evaluate_models(X=x_train, y=y_train, models=self.models)
+            model_report: dict = self.evaluate_models(X=x_train, y=y_train, x_test=x_test, y_test=y_test, models=self.models)
 
             ## To get best model score from dict
             best_model_score = max(sorted(model_report.values()))
