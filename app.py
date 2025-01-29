@@ -1,5 +1,6 @@
-from flask import Flask, render_template, jsonify, request, send_file
+from flask import Flask, render_template, request, send_file
 from src.exception import CustomException
+from urllib.parse import quote as url_quote
 from src.logger import logging as lg
 import os,sys
 
