@@ -1,6 +1,6 @@
 # sensorfaultdetection
  
-made by Dikshant Narware
+made by Dikshant Narware , i am a data scientist
 >>>>> conda activate base
 -
 >>>>> conda create --prefix venv python=3.8 -y 
